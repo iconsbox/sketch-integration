@@ -1,0 +1,78 @@
+{
+  "name": "iconbox-sketch",
+  "version": "1.0.0",
+  "description": "",
+  "skpm": {
+    "main": "IconBox.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
+  "scripts": {
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link",
+    "makeSvgNativeFiles": "node scripts/makeNativeSvgFiles.js",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:eslint": "eslint --ignore-path .gitignore packages",
+    "lint:eslint:fix": "eslint packages --fix",
+    "lint:js": "npm run lint:eslint -- . "
+  },
+  "author": "Jafar Rezaei <sayjeyhi@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@skpm/builder": "^0.7.5"
+  },
+  "dependencies": {
+    "@iconbox/clothes": "^1.0.5",
+    "@iconbox/config": "^1.0.5",
+    "@iconbox/eid": "^1.0.5",
+    "@iconbox/emoji": "^1.0.5",
+    "@iconbox/eva": "^1.0.5",
+    "@iconbox/fa4": "^1.0.5",
+    "@iconbox/fa5": "^1.0.5",
+    "@iconbox/feather": "^1.0.5",
+    "@iconbox/foundation": "^1.0.5",
+    "@iconbox/icomoon": "^1.0.5",
+    "@iconbox/iconly": "^1.0.5",
+    "@iconbox/ion": "^1.0.5",
+    "@iconbox/linear": "^1.0.5",
+    "@iconbox/material": "^1.0.5",
+    "@iconbox/oct": "^1.0.5",
+    "@iconbox/snappmarket": "^1.0.5",
+    "@iconbox/support": "^1.0.5",
+    "@iconbox/tabler": "^1.0.5",
+    "@svgr/core": "^5.4.0",
+    "chroma-js": "^1.2.2",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
+    "eslint-loader": "2.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-redux-saga": "^1.1.1",
+    "fs-extra": "^9.0.1",
+    "glob": "^7.1.6",
+    "prop-types": "^15.5.8",
+    "react": "^16.13.1",
+    "react-sketchapp": "^3.0.0",
+    "react-test-renderer": "^16.3.2"
+  },
+  "lint-staged": {
+    "(?!test|spec).*\\.js": [
+      "npm run lint:eslint:fix",
+      "git add --force"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add --force"
+    ]
+  },
+  "pre-commit": "lint:staged"
+}

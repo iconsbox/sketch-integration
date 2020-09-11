@@ -1,0 +1,17 @@
+{
+	"compatibleVersion": 3,
+	"bundleVersion": 1,
+	"commands": [
+		{
+			"name": "IconBox",
+			"identifier": "main",
+			"script": "./app.js"
+		}                      
+	],
+	"menu": {
+		"isRoot": true,
+		"items": [
+			"main"
+		]
+	}
+}
