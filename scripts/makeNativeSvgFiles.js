@@ -56,7 +56,7 @@ export { default as ${iconName} } from './${iconName}';`;
        * Convert svg to native svg
        * @type {(TextNode & {valid: boolean}) | (HTMLElement & {valid: boolean})}
       //  */
-      svgr(svgFileContent, { icon: true, native: true }, { componentName: iconName }).then(async jsCode => {
+      svgr(svgFileContent, { native: true }, { componentName: iconName }).then(async jsCode => {
         await fse.writeFile(
           `${fullPath}/IconBox/${packName}/${iconName}.js`,
           jsCode.replace('react-native-svg', 'react-sketchapp/lib/components/Svg'),
