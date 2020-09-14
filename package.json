@@ -50,7 +50,7 @@
   },
   "lint-staged": {
     "(?!test|spec).*\\.js": [
-      "npm run lint:eslint:fix",
+      "npm run  lint:eslint:fix",
       "git add --force"
     ],
     "*.json": [
