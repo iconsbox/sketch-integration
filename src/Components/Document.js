@@ -6,7 +6,7 @@ import * as Icons from '../../IconBox/index';
 
 const getTableCount = count => {
   const width = Math.ceil(Math.sqrt(count));
-  const height = Math.ceil(count / width);
+  const height = Math.floor(count / width);
 
   return {width, height};
 };
