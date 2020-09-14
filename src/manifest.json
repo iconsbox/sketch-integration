@@ -6,7 +6,7 @@
 			"name": "IconBox",
 			"identifier": "main",
 			"script": "./app.js"
-		}                      
+		}
 	],
 	"menu": {
 		"isRoot": true,
