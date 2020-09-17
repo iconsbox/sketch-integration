@@ -53,7 +53,7 @@ let whole = "";
           const path = svgpath(p3).toString();
           return `<path${p2} d="${path}"${p4}>`;
         },
-      ).replace("currentColor", "#fff");
+      ).replace(/currentColor/g, "#ffffff");
 
       await fse.ensureDirSync(`${fullPath}/IconBox`);
       await fse.ensureDirSync(`${fullPath}/IconBox/${packName}`);
