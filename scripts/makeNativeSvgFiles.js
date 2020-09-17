@@ -1,10 +1,11 @@
 const fse = require("fs-extra");
 const glob = require("glob");
 const svgr = require("@svgr/core").default;
+const svgpath = require("svgpath");
 
 // Glob index.svg files inb packages
 const svgIcons = glob.sync(
-    `${process.cwd()}/node_modules/@iconbox/*/*/index.svg`
+  `${process.cwd()}/node_modules/@iconbox/*/*/index.svg`,
 );
 
 /* eslint-disable indent */
@@ -23,7 +24,7 @@ const camelCase = d => {
         .map(a =>
             a
                 .replace(/^./, match => match.toUpperCase())
-                .replace(/(\_\w)/g, k => k[1].toUpperCase())
+                .replace(/(\_\w)/g, k => k[1].toUpperCase()),
         )
         .join("");
   } else {
@@ -45,7 +46,14 @@ let whole = "";
       const packName = sections[0];
       const iconName = sections[1];
 
-      const svgFileContent = await fse.readFile(icon, "utf-8");
+      let svgFileContent = await fse.readFile(icon, "utf-8");
+      svgFileContent = svgFileContent.replace(
+        /(<path(.*)d=["']?((?:.(?!["']?\s*?[>"']))+.)["']?(.*)>)/gm,
+        (wholes, p1, p2, p3, p4) => {
+          const path = svgpath(p3).toString();
+          return `<path${p2} d="${path}"${p4}>`;
+        },
+      );
 
       await fse.ensureDirSync(`${fullPath}/IconBox`);
       await fse.ensureDirSync(`${fullPath}/IconBox/${packName}`);
@@ -73,15 +81,15 @@ export { default as ${iconName} } from './${iconName}';`;
             noSvgo: true,
             nosvgo: true,
           },
-          { componentName: iconName }
+          { componentName: iconName },
       ).then(async jsCode => {
         await fse.writeFile(
             `${fullPath}/IconBox/${packName}/${iconName}.js`,
             jsCode.replace(
                 "react-native-svg",
-                "react-sketchapp/lib/components/Svg"
+                "react-sketchapp/lib/components/Svg",
             ),
-            "utf8"
+            "utf8",
         );
         console.log("Created: ", packName, iconName);
       });
@@ -96,7 +104,7 @@ export { default as ${iconName} } from './${iconName}';`;
     await fse.writeFile(
         `${process.cwd()}/IconBox/${key}/index.js`,
         content[key],
-        "utf8"
+        "utf8",
     );
   }
   await fse.writeFile(`${process.cwd()}/IconBox/index.js`, whole, "utf8");
