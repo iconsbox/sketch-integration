@@ -20,17 +20,17 @@ const camelCase = d => {
   let name = "";
   if (d.indexOf("-") > -1) {
     name = d
-        .split("-")
-        .map(a =>
-            a
-                .replace(/^./, match => match.toUpperCase())
-                .replace(/(\_\w)/g, k => k[1].toUpperCase()),
-        )
-        .join("");
+      .split("-")
+      .map(a =>
+        a
+          .replace(/^./, match => match.toUpperCase())
+          .replace(/(\_\w)/g, k => k[1].toUpperCase()),
+      )
+      .join("");
   } else {
     name = d
-        .replace(/^./, match => match.toUpperCase())
-        .replace(/(\_\w)/g, k => k[1].toUpperCase());
+      .replace(/^./, match => match.toUpperCase())
+      .replace(/(\_\w)/g, k => k[1].toUpperCase());
   }
 
   return name;
@@ -53,7 +53,7 @@ let whole = "";
           const path = svgpath(p3).toString();
           return `<path${p2} d="${path}"${p4}>`;
         },
-      );
+      ).replace("currentColor", "#fff");
 
       await fse.ensureDirSync(`${fullPath}/IconBox`);
       await fse.ensureDirSync(`${fullPath}/IconBox/${packName}`);
@@ -75,22 +75,23 @@ export { default as ${iconName} } from './${iconName}';`;
        * @type {(TextNode & {valid: boolean}) | (HTMLElement & {valid: boolean})}
        //  */
       svgr(
-          svgFileContent,
-          {
-            native: true,
-            noSvgo: true,
-            nosvgo: true,
-          },
-          { componentName: iconName },
+        svgFileContent,
+        {
+          native: true,
+          noSvgo: true,
+          nosvgo: true,
+        },
+        { componentName: iconName },
       ).then(async jsCode => {
         await fse.writeFile(
-            `${fullPath}/IconBox/${packName}/${iconName}.js`,
-            jsCode.replace(
-                "react-native-svg",
-                "react-sketchapp/lib/components/Svg",
-            ),
-            "utf8",
+          `${fullPath}/IconBox/${packName}/${iconName}.js`,
+          jsCode.replace(
+            "react-native-svg",
+            "react-sketchapp/lib/components/Svg",
+          ),
+          "utf8",
         );
+        // eslint-disable-next-line no-console
         console.log("Created: ", packName, iconName);
       });
     } catch (e) {
@@ -99,12 +100,14 @@ export { default as ${iconName} } from './${iconName}';`;
     }
   });
 
+  // eslint-disable-next-line guard-for-in,no-restricted-syntax
   for (const key in content) {
     whole += `export * as ${camelCase(key)} from "./${key}/index.js";`;
+    // eslint-disable-next-line no-await-in-loop
     await fse.writeFile(
-        `${process.cwd()}/IconBox/${key}/index.js`,
-        content[key],
-        "utf8",
+      `${process.cwd()}/IconBox/${key}/index.js`,
+      content[key],
+      "utf8",
     );
   }
   await fse.writeFile(`${process.cwd()}/IconBox/index.js`, whole, "utf8");
