@@ -12,24 +12,24 @@ const getTableCount = count => {
 };
 
 const Document = () =>
-    <Page name="IconBox">
-      {Object.keys(Icons).map(packName => {
-        const Pack = Icons[packName];
-        const table = getTableCount(Object.keys(Pack).length);
-        return <Artboard
-            name={packName}
-            style={{
-              backgroundColor: '#000',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              marginTop: 150,
-              width: table.width * 54,
-              height: table.height * 54,
-            }}
-        >
-          <PackageIcons name="eva" icons={Pack} table={table}/>
-        </Artboard>})}
-    </Page>;
+  <Page name="IconBox">
+    {Object.keys(Icons).map(packName => {
+      const Pack = Icons[packName];
+      const table = getTableCount(Object.keys(Pack).length);
+      return <Artboard
+        name={packName}
+        style={{
+          backgroundColor: '#000',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          marginTop: 150,
+          width: table.width * 54,
+          height: table.height * 54,
+        }}
+      >
+        <PackageIcons name="eva" icons={Pack} table={table}/>
+      </Artboard>})}
+  </Page>;
 
 export default Document;
 

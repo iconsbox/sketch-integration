@@ -24,7 +24,24 @@
     "@skpm/builder": "^0.7.5"
   },
   "dependencies": {
+    "@iconbox/clothes": "^1.0.5",
+    "@iconbox/config": "^1.0.5",
+    "@iconbox/eid": "^1.0.5",
+    "@iconbox/emoji": "^1.0.5",
+    "@iconbox/eva": "^1.0.5",
+    "@iconbox/fa4": "^1.0.5",
+    "@iconbox/fa5": "^1.0.5",
     "@iconbox/feather": "^1.0.5",
+    "@iconbox/foundation": "^1.0.5",
+    "@iconbox/icomoon": "^1.0.5",
+    "@iconbox/iconly": "^1.0.5",
+    "@iconbox/ion": "^1.0.5",
+    "@iconbox/linear": "^1.0.5",
+    "@iconbox/material": "^1.0.5",
+    "@iconbox/oct": "^1.0.5",
+    "@iconbox/snappmarket": "^1.0.5",
+    "@iconbox/support": "^1.0.5",
+    "@iconbox/tabler": "^1.0.5",
     "@svgr/core": "^5.4.0",
     "babel-eslint": "^10.1.0",
     "chroma-js": "^1.2.2",
@@ -46,7 +63,8 @@
     "prop-types": "^15.5.8",
     "react": "^16.13.1",
     "react-sketchapp": "^3.0.0",
-    "react-test-renderer": "^16.3.2"
+    "react-test-renderer": "^16.3.2",
+    "svgpath": "^2.3.0"
   },
   "lint-staged": {
     "(?!test|spec).*\\.js": [
